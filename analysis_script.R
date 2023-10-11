@@ -18,3 +18,17 @@ df %>%
   scale_x_continuous(breaks = seq(0, 1, 1))
 
 ggsave('first regression plot.jpeg', device = 'jpeg', units = 'cm')
+
+
+# get functions from misc_functions.R
+library(devtools)
+url <- 'https://github.com/ryanetracy/misc_functions/blob/main/misc_functions.R?raw=TRUE'
+source_url(url)
+
+m1 <- mean(df$exam[df$uni == 0])
+m2 <- mean(df$exam[df$uni == 1])
+sd1 <- sd(df$exam[df$uni == 0])
+sd2 <- sd(df$exam[df$uni == 1])
+
+get_cohen_d(m1, m2, sd1, sd2)
+
