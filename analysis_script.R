@@ -32,3 +32,19 @@ sd2 <- sd(df$exam[df$uni == 1])
 
 get_cohen_d(m1, m2, sd1, sd2)
 
+
+df$uni <- factor(df$uni)
+
+m2 <- lm(exam ~ uni * lectures, data = df)
+summary(m2)
+
+df %>%
+  ggplot(aes(lectures, exam, color = uni)) +
+  geom_point(alpha = .6,
+             shape = 4,
+             position = position_jitter(.05, 0)) +
+  geom_smooth(method = 'lm') +
+  scale_color_manual(values = c('turquoise2', 'black')) +
+  theme_light()
+
+ggsave('lectures dont work.jpeg', device = 'jpeg', units = 'cm')
